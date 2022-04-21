@@ -6,6 +6,21 @@ public class SearchParam {
     private String email;
     private int page;
 
+    public SearchParam(){}
+
+
+    // 필요한 부분만 따로 받기도 한다.
+    // 생성자를 만드는 데 시간이 많이 든다.
+    public SearchParam(String account){
+        this.account = account;
+    }
+
+    public SerachParam(String account, String email, int page) {
+        this.account = acount;
+        this.email = email;
+        this.page = page;
+    }
+
     public String getAccount() {
         return account;
     }
