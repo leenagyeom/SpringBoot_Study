@@ -1,47 +1,17 @@
 package com.example.study.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor // 모든 매개변수를 가지는 생성자가 추가된다.
 public class SearchParam {
 
     private String account;
     private String email;
     private int page;
-
-    public SearchParam(){}
-
-
-    // 필요한 부분만 따로 받기도 한다.
-    // 생성자를 만드는 데 시간이 많이 든다.
-    public SearchParam(String account){
-        this.account = account;
-    }
-
-    public SerachParam(String account, String email, int page) {
-        this.account = acount;
-        this.email = email;
-        this.page = page;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getPage() {
-        return page;
-    }
-
-    public void setPage(int page) {
-        this.page = page;
-    }
 }
+
+// structure에 변수만 남기고 @Data 어노테이션을 달아준다.
+// 경고가 뜨는데 build.gradle과 해당 파일에 추가된다.
+// File > Settings > Build, Execution, Deployment > Compiler > Annotation Processors 에서 Enable annotation processing 설정
