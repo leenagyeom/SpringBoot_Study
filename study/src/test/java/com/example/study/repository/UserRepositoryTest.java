@@ -38,8 +38,10 @@ public class UserRepositoryTest extends StudyApplicationTests {
         Optional<User> user = userRepository.findById(2L); // 2L : Longtype, find : User 테이블을 list로 모두 가져오겠다.
 
         user.ifPresent(selectUser ->{
-            System.out.println("user : "+ selectUser);
-            System.out.println("email : "+ selectUser.getEmail());
+            if (selectUser.getId() == 2) {
+                System.out.println("user : "+ selectUser);
+                System.out.println("email : "+ selectUser.getEmail());
+            }
         }); // selectUser가 Optional에 들어있으면 값을 꺼내서 println로 출력하겠다.
     }
 
