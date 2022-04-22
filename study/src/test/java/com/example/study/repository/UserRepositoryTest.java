@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -47,6 +48,7 @@ public class UserRepositoryTest extends StudyApplicationTests {
     }
 
     @Test
+    @Transactional // update 동작하더라도 데이터는 다시 원래상태로 돌려놓는다.
     public void update(){ // update하려면 특정 데이터를 select 먼저 해야한다.
         Optional<User> user = userRepository.findById(2L);
 
@@ -64,8 +66,9 @@ public class UserRepositoryTest extends StudyApplicationTests {
     }
 
     @Test
+    @Transactional  // transactional을 붙으면 삭제하더라도 다시 rollback 해준다
     public void delete(){
-        Optional<User> user = userRepository.findById(1L);
+        Optional<User> user = userRepository.findById(3L);
 
         Assert.assertTrue(user.isPresent()); // JUnit 패키지의 asserttrue 메소드로 isPresent가 true일 때 통과된다.
 
@@ -73,7 +76,7 @@ public class UserRepositoryTest extends StudyApplicationTests {
             userRepository.delete(selectUser);
         });
 
-        Optional<User> deleteUser = userRepository.findById(1L);
+        Optional<User> deleteUser = userRepository.findById(3L);
 
         Assert.assertFalse(deleteUser.isPresent()); // false 여야 통과된다.
 
