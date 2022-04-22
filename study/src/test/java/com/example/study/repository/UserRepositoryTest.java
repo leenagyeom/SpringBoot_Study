@@ -1,6 +1,7 @@
 package com.example.study.repository;
 
 import com.example.study.StudyApplicationTests;
+import com.example.study.model.entity.Item;
 import com.example.study.model.entity.User;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -36,14 +37,17 @@ public class UserRepositoryTest extends StudyApplicationTests {
     }
 
     @Test
+    @Transactional
     public void read(){ // 컨트롤러가 아니지만 CRUD와 RestAPI로 연결하면 가능
-        Optional<User> user = userRepository.findById(2L); // 2L : Longtype, find : User 테이블을 list로 모두 가져오겠다.
+
+        // select * from user where id = ?
+        Optional<User> user = userRepository.findById(7L); // 2L : Longtype, find : User 테이블을 list로 모두 가져오겠다.
 
         user.ifPresent(selectUser ->{
-            if (selectUser.getId() == 2) {
-                System.out.println("user : "+ selectUser);
-                System.out.println("email : "+ selectUser.getEmail());
-            }
+            selectUser.getOrderDetailList().stream().forEach(detail -> {
+                Item item = detail.getItem();
+                System.out.println(item);
+            });
         }); // selectUser가 Optional에 들어있으면 값을 꺼내서 println로 출력하겠다.
     }
 
